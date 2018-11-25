@@ -1,6 +1,7 @@
 #include "a4.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 static int population_comp(const void *a,const void *b)
 {
@@ -11,6 +12,7 @@ static int population_comp(const void *a,const void *b)
 
 PPM_IMAGE *evolve_image(const PPM_IMAGE *image, int num_generations, int population_size, double rate)
 {
+    srand(time(NULL));
     Individual *population;
     population = generate_population(population_size, image->width, image->height, image->max_color);
     comp_fitness_population(image->data, population, population_size);
@@ -21,7 +23,7 @@ PPM_IMAGE *evolve_image(const PPM_IMAGE *image, int num_generations, int populat
         mutate_population(population, population_size, rate);
         comp_fitness_population(image->data, population, population_size);
         qsort(population, population_size, sizeof(Individual), population_comp);
-        printf("Best Fitness:\t%f\t|Worst Fitness:\t%f\n", population[0].fitness,population[population_size-1].fitness);
+        printf("[%d]Best Fitness:\t%f\t|Worst Fitness:\t%f\n", (i+1), population[0].fitness,population[population_size-1].fitness);
     }
     return &(population[0].image);
 }

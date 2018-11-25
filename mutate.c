@@ -5,6 +5,7 @@
 void mutate(Individual *individual, double rate)
 {
     // srand(time(NULL));
+    // srand((unsigned int)time(NULL));
     int img_size = individual->image.height * individual->image.width;
     // printf("image size : %d", img_size);
     int selects = (int) ((rate/100)*img_size);

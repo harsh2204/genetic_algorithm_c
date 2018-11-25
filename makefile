@@ -6,7 +6,7 @@ OBJS = main.o readwriteppm.o fitness.o population.o evolve.o \
 	crossover.o mutate.o
 
 $(PROGRAM_NAME): $(OBJS)
-	$(CC) -o $@ $? -lm
+	$(CC) -pg -no-pie -o $@ $? -lm
 
 escher:
 	make; make

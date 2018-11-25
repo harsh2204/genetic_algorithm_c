@@ -1,5 +1,5 @@
 #include "a4.h"
-#include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 float sqrt_fast(float x)
@@ -18,10 +18,16 @@ double comp_distance(const PIXEL *A, const PIXEL *B, int image_size)
     double fitness = 0.0;
     while(--image_size)
     {
-        double r = (A[image_size].r-B[image_size].r);
-        double g = (A[image_size].g-B[image_size].g);
-        double b = (A[image_size].b-B[image_size].b);
-        fitness += ((r*r)+(g*g)+(b*b));
+        // // Given fitness function
+        // double r = (A[image_size].r-B[image_size].r);
+        // double g = (A[image_size].g-B[image_size].g);
+        // double b = (A[image_size].b-B[image_size].b);
+        // fitness += ((r*r)+(g*g)+(b*b));
+        // -------------------------------------------------------
+        // Experimental fitness function
+        double tA = A[image_size].r+A[image_size].g+A[image_size].b;
+        double tB = B[image_size].r+B[image_size].g+B[image_size].b;
+        fitness += (tA-tB)*(tA-tB);
     }
     // return fitness;
     // return sqrt_fast(fitness);
